@@ -1,0 +1,29 @@
+def columner_encrypt(plaintext, keyword):
+    plaintext = plaintext.replace(" ","").upper()
+    keyword = keyword.upper()
+   
+    cols = len(keyword)
+    rows = (len(plaintext)+cols -1)//cols
+   
+    padded_length = rows*cols
+    plaintext += 'X'*(padded_length-len(plaintext))
+   
+    matrix=[]
+    index = 0
+    for _ in range(rows):
+        matrix.append(list(plaintext[index:index+cols]))
+        index += cols
+       
+    key_order = sorted([(char, i) for i, char in enumerate(keyword)])
+   
+    ciphertext = ""
+    for _,col_index in key_order:
+        for rows in matrix:
+            ciphertext += rows[col_index]
+    return ciphertext
+
+plaintext = "IAMHAPPY"
+keyword = "YOU"
+
+encryption=columner_encrypt(plaintext, keyword)
+print("Ciphertext is : ",encryption)
