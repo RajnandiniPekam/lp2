@@ -8,4 +8,8 @@ def and_xor_with_127(input_str):
         print(f"Character :{char} | AND 127 : {and_result} | XOR 127:{xor_result}")
        
 input_string = "Hello World"
-and_xor_with_127(input_string)
+and_xor_with_127(input_string)  
+
+
+
+RUN IS CODE IN SPYDER
