@@ -1,14 +1,28 @@
 def get_rank_input(criterion):
-    rank = int(input(f"Enter rank for {criterion} (-5 to 5): "))
-    if -5 <= rank <= 5:
-        return rank
-    else:
-        print("Invalid input. Please enter an integer between -5 and 5.")
-    return get_rank_input(criterion)
+    try:
+        rank = int(input(f"Enter rank for {criterion} (-5 to 5): "))
+        if -5 <= rank <= 5:
+            return rank
+        else:
+            print("Invalid input. Please enter an integer between -5 and 5.")
+            return get_rank_input(criterion)
+    except ValueError:
+        print("Invalid input. Please enter a valid integer.")
+        return get_rank_input(criterion)
 
 # Function to evaluate total score
 def evaluate_employee(ranks):
     return sum(ranks.values())
+
+# Define evaluation criteria
+criteria = [
+    "Punctuality",
+    "Teamwork",
+    "Communication",
+    "Problem Solving",
+    "Initiative",
+    "Leadership"
+]
 
 # Main function
 def main():
