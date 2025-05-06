@@ -1,24 +1,45 @@
 import math
 
-p = int(input("Enter a prime number p : "))
-q = int(input("Enter a prime number q : "))
+# Input primes
+p = int(input("Enter a prime number p: "))
+q = int(input("Enter a prime number q: "))
 
-n = p*q
-phi = (p-1)*(q-1)
+# Step 1: Compute n and φ(n)
+n = p * q
+phi = (p - 1) * (q - 1)
 
-e=2
-while e<phi:
-    if math.gcd(e,phi) == 1:
+# Step 2: Choose e such that 1 < e < φ(n) and gcd(e, φ(n)) == 1
+e = 2
+while e < phi:
+    if math.gcd(e, phi) == 1:
         break
     e += 1
-   
-k=2
-d=((k*phi)+1)//e
 
-print("\nPublic key:(",e,",",n,")")
-print("\nPrivate key:(",d,",",n,")\n")
+# Step 3: Compute d such that (d * e) % φ(n) == 1
+# Using extended Euclidean algorithm or simplified method
+k = 1
+while True:
+    d = ((k * phi) + 1)
+    if d % e == 0:
+        d = d // e
+        break
+    k += 1
 
-msg = int(input("Enter a number message(less than n):"))
+# Display keys
+print("\nPublic key: (", e, ",", n, ")")
+print("Private key: (", d, ",", n, ")\n")
+
+# Step 4: Encryption
+msg = int(input("Enter a number message (less than n): "))
+if msg >= n:
+    print("Message must be less than n.")
+else:
+    C = pow(msg, e, n)
+    print("Encrypted message:", C)
+
+    # Step 5: Decryption
+    M = pow(C, d, n)
+    print("Decrypted message:", M)
 
 C = pow(msg,e,n)
 print("Encrypyed message: ",C)
